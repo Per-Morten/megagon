@@ -23,7 +23,7 @@ add_executable(megagon "${SRCDIR}/src/main.cpp")
 set_target_properties(
     megagon
     PROPERTIES
-#    CXX_STANDARD 17
+       CXX_STANDARD 17
     CXX_STANDARD_REQUIRED ON
     RUNTIME_OUTPUT_DIRECTORY "${BINDIR}"
     LIBRARY_OUTPUT_DIRECTORY "${BINDIR}/bin"
@@ -32,7 +32,7 @@ set_target_properties(
 target_sources(
     megagon
     PRIVATE "${SRCDIR}/src/parser.cpp"
-    PRIVATE "${SRCDIR}/src/logger.cpp"  
+    PRIVATE "${SRCDIR}/src/file.cpp"
 )
 
 
@@ -64,3 +64,22 @@ target_link_libraries(
 message("CMAKE_BINARY_DIR: " ${BINDIR})
 message("OPENGL_LIBRARIES"   ${OPENGL_LIBRARIES})
 message("GLEW_LIBRARY"       ${GLEW_LIBRARY})
+
+
+#
+# CONFIGURE DIRECTORIES (configure_file())
+#
+function(configure_directory src dest)
+
+    file(GLOB files ${src}/*)
+    foreach(absolutepath ${files})
+        get_filename_component(filename ${absolutepath} NAME)
+        message("Conf file: " ${src}/${filename} " -> " ${dest}/${filename})
+        configure_file(${src}/${filename} ${dest}/${filename} COPYONLY)
+    endforeach(absolutepath)
+
+endfunction()
+
+configure_directory(${SRCDIR}/shaders        ${BINDIR}/shaders)
+configure_directory(${SRCDIR}/blender/output ${BINDIR}/vertexdata)
+

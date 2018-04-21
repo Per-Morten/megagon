@@ -1,6 +1,4 @@
-
 #include <parser.h>
-
 
 namespace overkill
 {

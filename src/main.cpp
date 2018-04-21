@@ -4,6 +4,7 @@
 
 #include <gl_log.h>
 #include <logger.h>
+#include <file.h>
 
 int
 main(int argc, char** argv)
@@ -37,6 +38,9 @@ main(int argc, char** argv)
         glfwTerminate();
         LOG_ERROR("Failed to init GLEW");
     }
+
+    auto vdata = mg::load_vertex_data("Cube.yml");
+
 
     GLCall(glClearColor(0.5f, 0.5f, 0.5f, 1.0f));
 
