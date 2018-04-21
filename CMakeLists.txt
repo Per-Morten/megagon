@@ -29,9 +29,11 @@ set_target_properties(
     LIBRARY_OUTPUT_DIRECTORY "${BINDIR}/bin"
 )
 
-#target_sources(
-#    megagon
-#)
+target_sources(
+    megagon
+    PRIVATE "${SRCDIR}/src/parser.cpp"
+    PRIVATE "${SRCDIR}/src/logger.cpp"  
+)
 
 
 ################################
