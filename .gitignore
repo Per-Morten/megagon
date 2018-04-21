@@ -1,1 +1,9 @@
 build/
+
+
+.DS_Store
+
+blender/output/*
+blender/*
+!blender/export.py
+!blender/default.blend
